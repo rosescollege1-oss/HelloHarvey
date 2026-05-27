@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello Harvey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Sacramento&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="floating-shapes" aria-hidden="true">
+    <span class="cloud cloud-one"></span>
+    <span class="cloud cloud-two"></span>
+    <span class="cloud cloud-three"></span>
+    <span class="star star-one">✦</span>
+    <span class="star star-two">✧</span>
+    <span class="star star-three">✦</span>
+    <span class="star star-four">✧</span>
+    <span class="star star-five">✶</span>
+    <span class="star star-six">✦</span>
+    <span class="moon moon-one">☾</span>
+    <span class="moon moon-two">☽</span>
+    <span class="dot dot-one"></span>
+    <span class="dot dot-two"></span>
+    <span class="dot dot-three"></span>
+  </div>
+
+  <main id="app">
+    <section id="loginScreen" class="login-screen">
+      <div class="login-card">
+        <div class="script-logo">Hello Harvey</div>
+        <h1>A private little scrapbook for the people who love Harvey most.</h1>
+        <p class="soft-copy">Photos, little notes, and simple ways to love on Harvey Jones Domangue and Nat.</p>
+
+        <form id="loginForm" class="form-stack">
+          <label>
+            Username
+            <input id="usernameInput" type="text" autocomplete="username" placeholder="example: auntrosie" required />
+          </label>
+          <label>
+            Shared password
+            <input id="passwordInput" type="password" autocomplete="current-password" placeholder="Enter the family password" required />
+          </label>
+          <button class="primary-btn" type="submit">Enter Harvey’s world</button>
+          <p id="loginMessage" class="form-message"></p>
+        </form>
+
+        <div class="privacy-note">
+          <strong>A little privacy note</strong>
+          <p>This site is meant for trusted family and friends. Please do not save, screenshot, repost, or share anything without Nat’s permission.</p>
+        </div>      </div>
+    </section>
+
+    <section id="siteShell" class="site-shell hidden">
+      <header class="site-header">
+        <a href="#home" class="brand" data-nav="home">
+          <span class="brand-script">Hello Harvey</span>
+          <span class="brand-subtitle">private baby book</span>
+        </a>
+
+        <button id="menuToggle" class="menu-toggle" aria-label="Open menu">☰</button>
+
+        <nav id="mainNav" class="main-nav">
+          <a href="#home" data-nav="home">Home</a>
+          <a href="#photos" data-nav="photos">Photo Book</a>
+          <a href="#nat" data-nav="nat">Through Nat’s Eyes</a>
+          <a href="#village" data-nav="village">Village Board</a>
+          <a href="#visit" data-nav="visit">Before You Visit</a>
+          <a href="#letters" data-nav="letters">Letters to Harvey</a>
+          <a href="#account" data-nav="account" class="admin-nav-link">Account</a>
+        </nav>
+      </header>
+
+
+      <section id="homePage" class="page active-page">
+        <div class="simple-hero">
+          <p class="eyebrow">Arriving January 22</p>
+          <h1>Hello Harvey</h1>
+          <p>A private family scrapbook for photos, notes, and little ways to love on Harvey Jones Domangue and Nat.</p>
+
+          <div class="countdown-card">
+            <div class="countdown-number" id="daysUntilDue">—</div>
+            <div class="countdown-label">days until due</div>
+          </div>
+        </div>
+
+        <div class="home-grid">
+          <article class="mini-card">
+            <span class="mini-icon">☁</span>
+            <h2>Photo Book</h2>
+            <p>Browse Harvey’s photos in soft, organized scrapbook albums.</p>
+            <button class="text-btn" data-jump="photos">View Photos</button>
+          </article>
+          <article class="mini-card">
+            <span class="mini-icon">✦</span>
+            <h2>Harvey Through Nat’s Eyes</h2>
+            <p>Short updates and favorite moments, posted by Nat only.</p>
+            <button class="text-btn" data-jump="nat">Read Updates</button>
+          </article>
+          <article class="mini-card">
+            <span class="mini-icon">☾</span>
+            <h2>Village Board</h2>
+            <p>A simple place for Nat to post what would help most.</p>
+            <button class="text-btn" data-jump="village">See Needs</button>
+          </article>
+        </div>
+      </section>
+
+      <section id="photosPage" class="page">
+        <div class="page-heading simple-page-heading">
+          <h1>Photo Book</h1>
+        </div>
+
+        <div id="adminPhotoTools" class="admin-panel hidden">
+          <h2>Add a photo</h2>
+          <p class="panel-note">Demo version: photos save to this browser only. The production version needs private cloud storage.</p>
+          <form id="photoForm" class="form-grid">
+            <label>
+              Album
+              <select id="photoAlbum"></select>
+            </label>
+            <label>
+              Or create a new album
+              <input id="newPhotoAlbum" type="text" placeholder="First Christmas, 6 Months Old, Bath Time..." />
+            </label>
+            <label class="full-width">
+              Caption
+              <input id="photoCaption" type="text" placeholder="Harvey meeting Grandma for the first time" />
+            </label>
+            <label class="full-width">
+              Upload photo
+              <input id="photoFile" type="file" accept="image/*" />
+            </label>
+            <button class="primary-btn" type="submit">Add photo</button>
+          </form>
+        </div>
+
+        <div id="albumTabs" class="album-tabs"></div>
+        <div id="photoGrid" class="photo-grid"></div>
+      </section>
+
+      <section id="natPage" class="page">
+        <div class="page-heading">
+          <p class="eyebrow">little journal cards</p>
+          <h1>Harvey Through Nat’s Eyes</h1>
+          <p>Small moments, updates, and memories from Nat only.</p>
+        </div>
+
+        <div id="adminUpdateTools" class="admin-panel hidden">
+          <h2>Post an update</h2>
+          <form id="updateForm" class="form-stack">
+            <label>
+              Title
+              <input id="updateTitle" type="text" placeholder="Today’s tiny joy" required />
+            </label>
+            <label>
+              Update
+              <textarea id="updateBody" rows="4" placeholder="Write a little memory..." required></textarea>
+            </label>
+            <button class="primary-btn" type="submit">Post update</button>
+          </form>
+        </div>
+
+        <div id="updatesList" class="journal-list"></div>
+      </section>
+
+      <section id="villagePage" class="page">
+        <div class="page-heading">
+          <p class="eyebrow">it takes a village</p>
+          <h1>Village Board</h1>
+          <p>A simple board where Nat can post what would be helpful. Family can text her privately to offer.</p>
+        </div>
+
+        <div id="adminVillageTools" class="admin-panel hidden">
+          <h2>Post a need</h2>
+          <form id="needForm" class="form-grid">
+            <label>
+              What is needed?
+              <input id="needTitle" type="text" placeholder="Someone to hold Harvey while I shower" required />
+            </label>
+            <label>
+              Category
+              <select id="needCategory">
+                <option>Baby help</option>
+                <option>Food</option>
+                <option>Errands</option>
+                <option>House help</option>
+                <option>Mom support</option>
+                <option>Visitors</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="full-width">
+              Details
+              <textarea id="needDetails" rows="3" placeholder="Add timing, preferences, or anything helpful."></textarea>
+            </label>
+            <button class="primary-btn" type="submit">Post to Village Board</button>
+          </form>
+        </div>
+
+        <div id="needsList" class="needs-list"></div>
+      </section>
+
+      <section id="visitPage" class="page">
+        <div class="page-heading">
+          <p class="eyebrow">loving them well</p>
+          <h1>Before You Visit</h1>
+          <p>A gentle guide for keeping Harvey’s little world calm, clean, and easy on Nat.</p>
+        </div>
+
+        <div class="visit-grid">
+          <article class="visit-card">
+            <h2>Before coming over</h2>
+            <ul>
+              <li>Please check in before visiting.</li>
+              <li>Please stay home if you feel sick or have been around someone sick.</li>
+              <li>Please wash your hands when you arrive.</li>
+              <li>Please do not kiss Harvey.</li>
+              <li>Please ask before taking or posting photos.</li>
+            </ul>
+          </article>
+
+          <article class="visit-card">
+            <h2>Helpful visits look like</h2>
+            <ul>
+              <li>Bringing food or coffee.</li>
+              <li>Holding Harvey while Nat showers.</li>
+              <li>Folding laundry or loading dishes.</li>
+              <li>Refilling water or snacks.</li>
+              <li>Keeping visits short and easy.</li>
+            </ul>
+          </article>
+
+          <article class="visit-card full-width">
+            <h2>A soft little note</h2>
+            <p>We love that Harvey is so loved. As everyone settles in, thank you for helping keep things peaceful, flexible, and centered around what Nat and Harvey need most.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="lettersPage" class="page">
+        <div class="page-heading">
+          <p class="eyebrow">keepsakes for later</p>
+          <h1>Letters to Harvey</h1>
+          <p>Write Harvey a note he can read one day. Letters post automatically and can be printed or exported.</p>
+        </div>
+
+        <div class="letter-actions">
+          <button id="printLettersBtn" class="primary-btn" type="button">Print letters</button>
+          <button id="exportLettersBtn" class="secondary-btn" type="button">Export letters</button>
+        </div>
+
+        <div class="letter-form-card">
+          <h2>Write a letter</h2>
+          <form id="letterForm" class="form-stack">
+            <label>
+              Your name
+              <input id="letterName" type="text" placeholder="Aunt Rosie" required />
+            </label>
+            <label>
+              Letter
+              <textarea id="letterBody" rows="7" placeholder="Dear Harvey..." required></textarea>
+            </label>
+            <button class="primary-btn" type="submit">Post letter</button>
+          </form>
+        </div>
+
+        <div id="lettersList" class="letters-list"></div>
+      </section>
+
+      <section id="accountPage" class="page">
+        <div class="page-heading">
+          <p class="eyebrow">private access</p>
+          <h1>Account</h1>
+          <p>Manage access for the demo version of Hello Harvey.</p>
+        </div>
+
+        <div class="account-grid">
+          <article class="account-card">
+            <h2>Your session</h2>
+            <p id="accountUser"></p>
+            <button id="logoutBtn" class="secondary-btn" type="button">Log out</button>
+          </article>
+
+          <article id="adminAccessTools" class="account-card hidden">
+            <h2>User access</h2>
+            <p class="panel-note">Everyone uses the same shared password, but only approved usernames can enter.</p>
+            <form id="addUserForm" class="inline-form">
+              <input id="newUsername" type="text" placeholder="new username" required />
+              <select id="newUserRole">
+                <option value="viewer">viewer</option>
+                <option value="admin">admin</option>
+              </select>
+              <button class="primary-btn" type="submit">Add</button>
+            </form>
+            <div id="usersList" class="users-list"></div>
+          </article>
+
+          <article id="adminPasswordTools" class="account-card hidden">
+            <h2>Shared password</h2>
+            <p class="panel-note">Changing this updates the password for this browser demo. Production needs a real backend to sync this securely.</p>
+            <form id="passwordForm" class="inline-form">
+              <input id="newPassword" type="text" placeholder="new shared password" required />
+              <button class="primary-btn" type="submit">Update</button>
+            </form>
+            <p id="passwordMessage" class="form-message"></p>
+          </article>
+        </div>
+      </section>
+    </section>
+    <section id="privacyModal" class="privacy-modal hidden" aria-modal="true" role="dialog">
+      <div class="privacy-modal-card">
+        <div class="privacy-icon">☾</div>
+        <h2>Before you enter Harvey’s little world</h2>
+        <p>This is a private space for Harvey and the people closest to him. Please do not save, screenshot, repost, or share photos, comments, letters, or updates without Nat’s permission.</p>
+        <label class="privacy-check">
+          <input id="privacyAgreeCheckbox" type="checkbox" />
+          <span>I understand this is a private family space.</span>
+        </label>
+        <button id="privacyAgreeBtn" class="primary-btn" type="button" disabled>Enter the site</button>
+      </div>
+    </section>
+
+  </main>
+
+  <template id="commentTemplate">
+    <form class="comment-form">
+      <input type="text" placeholder="Leave a little comment..." required />
+      <button type="submit">Post</button>
+    </form>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
