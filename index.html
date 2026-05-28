@@ -111,34 +111,75 @@
       <section id="photosPage" class="page">
         <div class="page-heading simple-page-heading">
           <h1>Photo Book</h1>
+          <p>Nat’s photos stay in the main scrapbook. Family uploads live in their own little space.</p>
         </div>
 
-        <div id="adminPhotoTools" class="admin-panel hidden">
-          <h2>Add a photo</h2>
-          <p class="panel-note">Demo version: photos save to this browser only. The production version needs private cloud storage.</p>
-          <form id="photoForm" class="form-grid">
-            <label>
-              Album
-              <select id="photoAlbum"></select>
-            </label>
-            <label>
-              Or create a new album
-              <input id="newPhotoAlbum" type="text" placeholder="First Christmas, 6 Months Old, Bath Time..." />
-            </label>
-            <label class="full-width">
-              Caption
-              <input id="photoCaption" type="text" placeholder="Harvey meeting Grandma for the first time" />
-            </label>
-            <label class="full-width">
-              Upload photo
-              <input id="photoFile" type="file" accept="image/*" />
-            </label>
-            <button class="primary-btn" type="submit">Add photo</button>
-          </form>
+        <div class="photo-upload-grid">
+          <div id="adminPhotoTools" class="admin-panel hidden">
+            <h2>Add to Nat’s Photo Book</h2>
+            <form id="natPhotoForm" class="form-grid">
+              <label>
+                Album
+                <select id="natPhotoAlbum"></select>
+              </label>
+              <label>
+                Or create a new album
+                <input id="newNatPhotoAlbum" type="text" placeholder="1 Month Old, First Christmas..." />
+              </label>
+              <label class="full-width">
+                Caption
+                <input id="natPhotoCaption" type="text" placeholder="Harvey meeting Grandma for the first time" />
+              </label>
+              <label class="full-width">
+                Upload photo
+                <input id="natPhotoFile" type="file" accept="image/*" required />
+              </label>
+              <button class="primary-btn" type="submit">Upload to Nat’s Book</button>
+            </form>
+          </div>
+
+          <div class="admin-panel">
+            <h2>Add a Family Photo</h2>
+            <p class="panel-note">Family photos stay separate from Nat’s main scrapbook.</p>
+            <form id="familyPhotoForm" class="form-grid">
+              <label>
+                Album
+                <select id="familyPhotoAlbum"></select>
+              </label>
+              <label>
+                Or create a new album
+                <input id="newFamilyPhotoAlbum" type="text" placeholder="Family Visits, Shower, Birthday..." />
+              </label>
+              <label class="full-width">
+                Caption
+                <input id="familyPhotoCaption" type="text" placeholder="A sweet visit with Harvey" />
+              </label>
+              <label class="full-width">
+                Upload photo
+                <input id="familyPhotoFile" type="file" accept="image/*" required />
+              </label>
+              <button class="primary-btn" type="submit">Upload Family Photo</button>
+            </form>
+          </div>
         </div>
 
-        <div id="albumTabs" class="album-tabs"></div>
-        <div id="photoGrid" class="photo-grid"></div>
+        <div class="photo-section">
+          <div class="section-title-row">
+            <h2>Nat’s Photo Book</h2>
+            <p>Official scrapbook photos from Nat.</p>
+          </div>
+          <div id="natAlbumTabs" class="album-tabs"></div>
+          <div id="natPhotoGrid" class="photo-grid"></div>
+        </div>
+
+        <div class="photo-section">
+          <div class="section-title-row">
+            <h2>Family Photos</h2>
+            <p>Photos uploaded by family and friends.</p>
+          </div>
+          <div id="familyAlbumTabs" class="album-tabs"></div>
+          <div id="familyPhotoGrid" class="photo-grid"></div>
+        </div>
       </section>
 
       <section id="natPage" class="page">
@@ -170,37 +211,80 @@
         <div class="page-heading">
           <p class="eyebrow">it takes a village</p>
           <h1>Village Board</h1>
-          <p>A simple board where Nat can post what would be helpful. Family can text her privately to offer.</p>
+          <p>A simple place for Nat to post what would help, plus a wishlist family can check before buying.</p>
         </div>
 
-        <div id="adminVillageTools" class="admin-panel hidden">
-          <h2>Post a need</h2>
-          <form id="needForm" class="form-grid">
-            <label>
-              What is needed?
-              <input id="needTitle" type="text" placeholder="Someone to hold Harvey while I shower" required />
-            </label>
-            <label>
-              Category
-              <select id="needCategory">
-                <option>Baby help</option>
-                <option>Food</option>
-                <option>Errands</option>
-                <option>House help</option>
-                <option>Mom support</option>
-                <option>Visitors</option>
-                <option>Other</option>
-              </select>
-            </label>
-            <label class="full-width">
-              Details
-              <textarea id="needDetails" rows="3" placeholder="Add timing, preferences, or anything helpful."></textarea>
-            </label>
-            <button class="primary-btn" type="submit">Post to Village Board</button>
-          </form>
-        </div>
+        <div class="village-layout">
+          <div class="village-column">
+            <div id="adminVillageTools" class="admin-panel hidden">
+              <h2>Post a need</h2>
+              <form id="needForm" class="form-grid">
+                <label>
+                  What is needed?
+                  <input id="needTitle" type="text" placeholder="Someone to hold Harvey while I shower" required />
+                </label>
+                <label>
+                  Category
+                  <select id="needCategory">
+                    <option>Baby help</option>
+                    <option>Food</option>
+                    <option>Errands</option>
+                    <option>House help</option>
+                    <option>Mom support</option>
+                    <option>Visitors</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label class="full-width">
+                  Details
+                  <textarea id="needDetails" rows="3" placeholder="Add timing, preferences, or anything helpful."></textarea>
+                </label>
+                <button class="primary-btn" type="submit">Post Need</button>
+              </form>
+            </div>
 
-        <div id="needsList" class="needs-list"></div>
+            <div class="section-title-row">
+              <h2>Current Needs</h2>
+              <p>Text Nat privately if you can help.</p>
+            </div>
+            <div id="needsList" class="needs-list"></div>
+          </div>
+
+          <div class="village-column">
+            <div id="adminWishlistTools" class="admin-panel hidden">
+              <h2>Wishlist</h2>
+              <form id="registryEventForm" class="form-stack small-form">
+                <label>
+                  Registry/event name
+                  <input id="registryEventNameInput" type="text" placeholder="Harvey’s Wishlist" />
+                </label>
+                <button class="secondary-btn" type="submit">Update Event Name</button>
+              </form>
+
+              <form id="wishlistForm" class="form-grid">
+                <label>
+                  Item name
+                  <input id="wishlistItemName" type="text" placeholder="Board books" required />
+                </label>
+                <label>
+                  Link
+                  <input id="wishlistLink" type="url" placeholder="https://..." />
+                </label>
+                <label class="full-width">
+                  Note
+                  <textarea id="wishlistNote" rows="3" placeholder="Size, color, brand, or anything helpful."></textarea>
+                </label>
+                <button class="primary-btn" type="submit">Add Wishlist Item</button>
+              </form>
+            </div>
+
+            <div class="section-title-row">
+              <h2 id="wishlistTitle">Harvey’s Wishlist</h2>
+              <p>Mark items bought so everyone knows what is still needed.</p>
+            </div>
+            <div id="wishlistList" class="wishlist-list"></div>
+          </div>
+        </div>
       </section>
 
       <section id="visitPage" class="page">
@@ -274,7 +358,7 @@
         <div class="page-heading">
           <p class="eyebrow">private access</p>
           <h1>Account</h1>
-          <p>Manage access for the demo version of Hello Harvey.</p>
+          <p>Manage approved usernames for Hello Harvey.</p>
         </div>
 
         <div class="account-grid">
@@ -286,7 +370,7 @@
 
           <article id="adminAccessTools" class="account-card hidden">
             <h2>User access</h2>
-            <p class="panel-note">Everyone uses the same shared password, but only approved usernames can enter.</p>
+            <p class="panel-note">Everyone uses the same shared password, but only approved usernames can enter. New users update automatically.</p>
             <form id="addUserForm" class="inline-form">
               <input id="newUsername" type="text" placeholder="new username" required />
               <select id="newUserRole">
