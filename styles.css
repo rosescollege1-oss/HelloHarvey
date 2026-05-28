@@ -1543,3 +1543,28 @@ body {
   font-weight: 900;
   text-decoration: none;
 }
+
+
+/* Stronger Google Drive image fallback */
+.photo-card img {
+  display: block;
+  min-height: 220px;
+  background:
+    radial-gradient(circle at 35% 20%, rgba(250, 214, 136, 0.35), transparent 7rem),
+    linear-gradient(135deg, rgba(166, 178, 181, 0.35), rgba(245, 214, 194, 0.4));
+}
+
+.image-fallback-link {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-height: 220px;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 35% 20%, rgba(250, 214, 136, 0.46), transparent 7rem),
+    linear-gradient(135deg, rgba(166, 178, 181, 0.42), rgba(245, 214, 194, 0.48));
+  color: var(--deep-blue);
+  font-weight: 900;
+  text-decoration: none;
+}

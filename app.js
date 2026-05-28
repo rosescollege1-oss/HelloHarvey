@@ -242,21 +242,36 @@ function renderAlbumSelects() {
 
 function driveImageSource(photo) {
   const fileId = String(photo.fileId || "").trim();
+  const imageUrl = String(photo.imageUrl || "").trim();
+  const fileUrl = String(photo.fileUrl || "").trim();
 
   if (fileId) {
-    return `https://drive.google.com/thumbnail?id=${encodeURIComponent(fileId)}&sz=w1200`;
+    return `https://lh3.googleusercontent.com/d/${encodeURIComponent(fileId)}=w1200`;
   }
 
-  return String(photo.imageUrl || "").trim();
+  if (imageUrl) return imageUrl;
+  if (fileUrl && fileUrl.includes("/d/")) {
+    const match = fileUrl.match(/\/d\/([^/]+)/);
+    if (match?.[1]) return `https://lh3.googleusercontent.com/d/${encodeURIComponent(match[1])}=w1200`;
+  }
+
+  return "";
 }
 
 function fallbackDriveImage(img, photo) {
   const fileId = String(photo.fileId || "").trim();
+  const imageUrl = String(photo.imageUrl || "").trim();
   const fileUrl = String(photo.fileUrl || "").trim();
 
-  if (fileId && !img.dataset.usedAlt) {
-    img.dataset.usedAlt = "true";
-    img.src = `https://lh3.googleusercontent.com/d/${encodeURIComponent(fileId)}=w1200`;
+  if (fileId && !img.dataset.triedThumb) {
+    img.dataset.triedThumb = "true";
+    img.src = `https://drive.google.com/thumbnail?id=${encodeURIComponent(fileId)}&sz=w1200`;
+    return;
+  }
+
+  if (imageUrl && !img.dataset.triedImageUrl && img.src !== imageUrl) {
+    img.dataset.triedImageUrl = "true";
+    img.src = imageUrl;
     return;
   }
 
@@ -265,7 +280,7 @@ function fallbackDriveImage(img, photo) {
     return;
   }
 
-  img.outerHTML = `<div class="placeholder-photo">Photo</div>`;
+  img.outerHTML = `<div class="placeholder-photo">${escapeHTML(photo.album || "Photo")}</div>`;
 }
 
 
@@ -295,7 +310,9 @@ function renderPhotos(photoType) {
     const imageSrc = driveImageSource(photo);
     const safePhotoJson = escapeHTML(JSON.stringify({
       fileId: photo.fileId || "",
-      fileUrl: photo.fileUrl || ""
+      fileUrl: photo.fileUrl || "",
+      imageUrl: photo.imageUrl || "",
+      album: photo.album || "Photo"
     }));
 
     const image = imageSrc
