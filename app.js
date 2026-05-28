@@ -240,6 +240,35 @@ function renderAlbumSelects() {
   if (familySelect) familySelect.value = currentFamilyAlbum;
 }
 
+function driveImageSource(photo) {
+  const fileId = String(photo.fileId || "").trim();
+
+  if (fileId) {
+    return `https://drive.google.com/thumbnail?id=${encodeURIComponent(fileId)}&sz=w1200`;
+  }
+
+  return String(photo.imageUrl || "").trim();
+}
+
+function fallbackDriveImage(img, photo) {
+  const fileId = String(photo.fileId || "").trim();
+  const fileUrl = String(photo.fileUrl || "").trim();
+
+  if (fileId && !img.dataset.usedAlt) {
+    img.dataset.usedAlt = "true";
+    img.src = `https://lh3.googleusercontent.com/d/${encodeURIComponent(fileId)}=w1200`;
+    return;
+  }
+
+  if (fileUrl) {
+    img.outerHTML = `<a class="image-fallback-link" href="${escapeHTML(fileUrl)}" target="_blank" rel="noopener">Open photo</a>`;
+    return;
+  }
+
+  img.outerHTML = `<div class="placeholder-photo">Photo</div>`;
+}
+
+
 function renderPhotos(photoType) {
   const isNat = photoType === "nat";
   const tabsEl = document.getElementById(isNat ? "natAlbumTabs" : "familyAlbumTabs");
@@ -263,8 +292,14 @@ function renderPhotos(photoType) {
   }
 
   gridEl.innerHTML = [...photos].reverse().map(photo => {
-    const image = photo.imageUrl
-      ? `<img src="${escapeHTML(photo.imageUrl)}" alt="${escapeHTML(photo.caption || photo.album)}" draggable="false" />`
+    const imageSrc = driveImageSource(photo);
+    const safePhotoJson = escapeHTML(JSON.stringify({
+      fileId: photo.fileId || "",
+      fileUrl: photo.fileUrl || ""
+    }));
+
+    const image = imageSrc
+      ? `<img src="${escapeHTML(imageSrc)}" alt="${escapeHTML(photo.caption || photo.album)}" draggable="false" data-photo='${safePhotoJson}' onerror="fallbackDriveImage(this, JSON.parse(this.dataset.photo))" />`
       : `<div class="placeholder-photo">${escapeHTML(photo.album || "Photo")}</div>`;
 
     const comments = state.photoComments.filter(comment => String(comment.photoId) === String(photo.photoId));

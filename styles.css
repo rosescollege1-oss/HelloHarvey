@@ -1529,3 +1529,17 @@ body {
   .photo-upload-grid,
   .village-layout { grid-template-columns: 1fr; }
 }
+
+
+/* Image display fix */
+.image-fallback-link {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  background: rgba(250, 214, 136, 0.32);
+  color: var(--deep-blue);
+  font-weight: 900;
+  text-decoration: none;
+}
